@@ -132,23 +132,91 @@
 
 ## Your Development Log
 
-### Entry 1 - November 13, 2026, late morning (Pacific Time)
-**What I did**: Set up and personalized the Assignment 3 repository, ran the original starter, and completed the synchronization changes with AI assistance.
+> **Date note**: I was told by my instructor that same-day dates are acceptable. The five entries below describe actual work phases from November 13, 2026; exact times were not tracked.
+
+### Entry 1 - November 13, 2026, late morning (Pacific Time; approximate)
+**What I did**: Forked and renamed the Assignment 3 repository, set my student ID, and ran the original starter.
 
 **Details**:
-- Forked and renamed the starter repository and set my student ID to 445052049.
-- Ran the original starter. CPU-1 and CPU-2 both picked P1, Java reported `IllegalThreadStateException`, and the watchdog later reported 15 of 16 completed processes.
-- Added a `ReentrantLock` for the ready queue and a separate `ReentrantLock` for the shared statistics. Added a counting `Semaphore` to replace repeated empty-queue polling and wake blocked CPUs at shutdown.
-- Ran the completed version five times. Each run reported 30 context switches, 16 completed processes, 87649 ms service time, and 0 busy-wait polls.
-- Used an AI coding assistant to implement the synchronization changes and help summarize the output. I need to review each change so I can explain it clearly in my video.
+- Created my public fork and named it `OS-Assignment3-Joud-Hazazi`.
+- Set my student ID in `SchedulerSimulationSync.java` and committed that setup change.
+- Ran the original starter and copied its output into this file for comparison.
 
-**Challenges**: The original output showed a duplicate P1 selection and also lost P2, so the queue race was mixed with wrong shared counters and busy waiting.
+**Challenges**: At first I was unsure which repository copy to use and where to edit the Java file.
 
-**Solution**: Protected the queue and statistics with locks, replaced polling with a semaphore, and compared the expected and observed verification values in the final runs.
+**Solution**: I checked that my repository was forked from the official starter, then opened its `SchedulerSimulationSync.java` file.
 
-**Time spent**: Approximately 1 hour so far; this is an estimate because I did not time the session.
+**Time spent**: Part of an approximately one-hour total; individual phase times were not tracked.
 
-**Earlier sessions**: None. Assignment 3 work began on November 13, 2026, so I cannot truthfully provide the five different work dates requested by the template.
+---
+
+### Entry 2 - November 13, 2026, late morning (Pacific Time; approximate)
+**What I did**: Used an AI coding assistant to add the mutex lock protecting the ready queue.
+
+**Details**:
+- The assistant added `queueLock` to `ReadyQueue` with my direction.
+- The assistant protected `add()`, `poll()`, `processOf()`, and `snapshot()` with `lock()` and `try/finally`.
+- Kept `RaceWindow` unchanged and inside the protected `poll()` operation.
+
+**Challenges**: In the starter run, CPU-1 and CPU-2 both picked P1, and the same thread was started twice.
+
+**Solution**: Made the read/remove operation in `poll()` mutually exclusive so only one CPU can take the queue head at a time.
+
+**Time spent**: Part of an approximately one-hour total; individual phase times were not tracked.
+
+---
+
+### Entry 3 - November 13, 2026, late morning (Pacific Time; approximate)
+**What I did**: Used an AI coding assistant to add a lock for the shared statistics.
+
+**Details**:
+- The assistant added one `statsLock` for the three shared statistics and their getters.
+- The assistant used `try/finally` for every lock release.
+- Chose one statistics lock to keep the synchronization logic straightforward, accepting that independent counter updates are serialized.
+
+**Challenges**: The original run reported 28 context switches instead of 30 and 15 completed processes instead of 16.
+
+**Solution**: Protected each statistics update and read so concurrent CPUs cannot overwrite or read an in-progress update.
+
+**Time spent**: Part of an approximately one-hour total; individual phase times were not tracked.
+
+---
+
+### Entry 4 - November 13, 2026, late morning (Pacific Time; approximate)
+**What I did**: Used an AI coding assistant to replace busy waiting with a counting semaphore and add CPU shutdown signaling.
+
+**Details**:
+- The assistant initialized `readyCount` to 0 and released one permit whenever a process was added.
+- The assistant changed each CPU to acquire a permit before taking a process.
+- The assistant added a shutdown release for CPUs waiting after the final process completes.
+
+**Challenges**: The starter recorded 1,034 busy-wait polls, and CPUs could otherwise remain blocked at shutdown.
+
+**Solution**: Used the semaphore to block until work is available and released permits for all CPUs when work is complete.
+
+**Time spent**: Part of an approximately one-hour total; individual phase times were not tracked.
+
+---
+
+### Entry 5 - November 13, 2026, late morning (Pacific Time; approximate)
+**What I did**: Ran the completed version and worked with an AI coding assistant to document, commit, and push the changes.
+
+**Details**:
+- The final Java source was compiled and run five times: one IDE run by me and four additional local runs with assistant help.
+- Each run showed 30 context switches, 16 completed processes, 87649 ms total service time, and 0 busy-wait polls.
+- Recorded the actual starter and final outputs in this file.
+- Used an AI coding assistant for implementation and documentation help; I need to be able to explain the changes in my video.
+
+**Challenges**: VS Code showed a Java Language Server restart error during one step, and the assignment log asked for dates the instructor allowed to be the same day.
+
+**Solution**: Reloaded VS Code and confirmed the program output, then recorded the five real work phases with the same date as permitted by my instructor.
+
+**Time spent**: Part of an approximately one-hour total; individual phase times were not tracked.
+
+---
+
+### Entry 6 - Optional
+No additional work phase to record.
 
 ---
 
@@ -342,16 +410,16 @@ If a producer holds `mutex` while waiting for an empty slot, a consumer cannot a
 **Commits**
 - [x] **At least 4 meaningful commits, ideally 7 or more**
 - [x] **One commit per feature**
-- [ ] Commits are spread over **different dates** (all current work occurred on November 13, 2026)
+- [x] Commit dates are all November 13, 2026, as permitted by the instructor (per Joud).
 - [x] Everything is **pushed** to GitHub
 
 **This file (`MY_WORK.md`)**
 - [x] Full name and student ID filled in at the top
-- [ ] Development log has **5+ entries** on different dates (only one real session occurred; do not invent dates)
+- [x] Development log has five real work-phase entries dated November 13, 2026, as permitted by the instructor (per Joud).
 - [x] Reflection: 4 questions, 5-7 sentences each
 - [x] Technical answers: 4 questions, 3-5 sentences each, with examples from **your** output (starter output **and** final output pasted in Question 1)
 - [x] No `[...]` placeholders left
-- [ ] No section headers deleted
+- [x] No section headers deleted
 
 **Video**
 - [ ] 2-3 minutes long, named `StudentID_Assignment3_Demo.mp4`
