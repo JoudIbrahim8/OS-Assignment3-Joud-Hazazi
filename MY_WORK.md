@@ -42,7 +42,7 @@
 
 ## 🎥 Video Link
 
-**Video Link**: Pending — Joud will add the public video link after recording.
+**Video Link**: https://drive.google.com/file/d/1RXiAWCjMPOVpgsqbdh--RWvu4erlMkqr/view?usp=drivesdk
 
 > ⚠️ **WARNING:** The video must be **publicly accessible** ("Anyone with the link can view") on **Google Drive**, **YouTube (Unlisted or Public)** or any other cloud file-sharing system. A private, restricted or broken link counts as a **missing video (-1 mark)**.
 >
@@ -425,6 +425,7 @@ If a producer holds `mutex` while waiting for an empty slot, a consumer cannot a
 - [ ] 2-3 minutes long, named `StudentID_Assignment3_Demo.mp4`
 - [ ] Shows your name, ID, repository, 3 features (and your lock granularity choice), IDE execution with the verification block, one synchronization concept, and commit history
 - [ ] Public video link is added to the **Video Link** section after Joud records the video
+
 
 **Blackboard**
 - [ ] Submit **only** the link to your public GitHub repository
